@@ -28,8 +28,7 @@ ReactDOM.render(
             </Switch>
         </Router>
     </Provider>,
-    document.getElementById("root")
-);
+    document.getElementById("container"))
 
 function MainMenu() {
     let location = useLocation();

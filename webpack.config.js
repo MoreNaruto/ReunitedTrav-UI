@@ -1,45 +1,59 @@
 var Dotenv = require('dotenv-webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const path = require('path');
 
 module.exports = {
-    entry: {
-        app: './src/index.js',
-    },
+    entry: ['./src/index.js'],
     output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: __dirname + '/dist',
+        publicPath: '/',
+        filename: 'bundle.js'
     },
-    devtool: 'inline-source-map',
     resolve: {
-        extensions: [".jsx", ".json", ".js"]
+        extensions: ['.js', '.jsx'],
+        plugins: [
+            new DirectoryNamedWebpackPlugin()
+        ]
     },
     module: {
         rules: [
             {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
+                test: /\.(js)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
             },
             {
                 test: /\.css$/,
-                loader: 'style!css!'
+                loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
     plugins: [
         new Dotenv(),
         new webpack.ProgressPlugin(),
-        new CleanWebpackPlugin({cleanStaleWebpackAssets: false})
+        new HtmlWebpackPlugin({template: "./src/index.html", filename: "./index.html"}),
+        new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
+        new webpack.HotModuleReplacementPlugin()
     ],
     stats: {
         colors: true
     },
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    }
 }
