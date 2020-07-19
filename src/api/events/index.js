@@ -1,10 +1,9 @@
 const apiUrl = process.env['BASE_API_URL'] || 'http://localhost:8080'
+import axios from "axios"
 
 export async function fetchEvents() {
-    try {
-        const response = await fetch(`${apiUrl}/events`);
-        return await response.json();
-    } catch (e) {
-        console.log(e);
-    }
+    return axios({
+        method: "get",
+        url: `${apiUrl}/events`
+    })
 }

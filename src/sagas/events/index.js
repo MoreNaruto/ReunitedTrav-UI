@@ -1,14 +1,15 @@
-import {call, put, takeEvery, takeLatest} from "redux-saga/effects";
-import {receiveEventsApiData} from "../../actions/events";
+import {call, put, takeLatest} from "redux-saga/effects";
+import {failedReceiveEventsApiData, receiveEventsApiData} from "../../actions/events";
 import {REQUEST_EVENTS_API_DATA} from "../../actions/events/types";
 import {fetchEvents} from "../../api/events";
 
-function* getEvents(action) {
+function* getEvents() {
     try{
-        const eventData = yield call(fetchEvents)
-        yield put(receiveEventsApiData(eventData))
-    } catch (e) {
-        console.log(e);
+        const response = yield call(fetchEvents)
+        yield put(receiveEventsApiData(response))
+    } catch (error) {
+        // dispatch a failure action to the store with the error
+        yield put(failedReceiveEventsApiData(error));
     }
 }
 

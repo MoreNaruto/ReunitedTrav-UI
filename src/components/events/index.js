@@ -1,24 +1,59 @@
 import React, {Component} from "react";
-
-import {bindActionCreators} from "redux";
+import {Spinner, Card} from "react-bootstrap";
 import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 
 import {requestEventsApiData} from "../../actions/events";
 
 class Events extends Component {
     componentDidMount() {
-        this.props.requestEventsApiData();
+        this.props.fetchEvents()
     }
 
     render() {
-        console.log("Props: " + this.props.data);
+        const {events, loading} = this.props;
+
         return (
-            <h2>Events Page</h2>
+            <div>
+                {loading
+                    ? <Spinner animation="border"/>
+                    : events.map((eventData, _) =>
+                        <Card>
+                            <Card.Img variant="top" src={eventData.images[0]}/>
+                            <Card.Body>
+                                <Card.Title>{eventData.name}</Card.Title>
+                                <Card.Text>
+                                    {eventData.description}
+                                </Card.Text>
+                                <Card.Text>
+                                    Minimum Number of people: {eventData.minimumAmountOfPeople}
+                                </Card.Text>
+                                <Card.Text>
+                                    Maximum Number of people: {eventData.maximumAmountOfPeople}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    )
+                }
+            </div>
         )
     }
 }
 
-const mapStateToProps = state => ({data: state.data})
-const mapDispatchToProps = dispatch => bindActionCreators({requestEventsApiData}, dispatch)
+const mapStateToProps = state => ({
+    loading: state.eventsData.loading,
+    events: state.eventsData.events,
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchEvents: () => dispatch(requestEventsApiData())
+    }
+}
+
+Events.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    events: PropTypes.array.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Events);
