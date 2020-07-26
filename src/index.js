@@ -1,70 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Provider} from "react-redux";
 import "./index.css";
 import store from "./store";
-import Home from "./components/home";
-import Events from "./components/events";
+import Home from "./pages/home";
+import Events from "./pages/events"
+import PageNotFound from "./pages/page-not-found"
 import serviceWorker from "./registerServiceWorker";
-import {
-    BrowserRouter as Router, Switch, Route, Link, Redirect, useLocation
-} from "react-router-dom";
-import {
-    TransitionGroup,
-    CSSTransition
-} from "react-transition-group";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { AuthContext } from "./context/auth";
+import PrivateRoute from "./routes/private";
+import NavLink from "./components/NavLink";
+import { Provider } from "react-redux";
+import Login from "./pages/login";
+import Signup from "./pages/sign-up";
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router>
-            <Switch>
-                <Route exact path="/">
-                    <Redirect to="/home"/>
-                </Route>
-                <Route path="*">
-                    <MainMenu/>
-                </Route>
-            </Switch>
-        </Router>
-    </Provider>,
-    document.getElementById("container")
-)
-
-function MainMenu() {
-    let location = useLocation();
-
-    return (
-        <div className="navFill">
-            <ul className="nav">
-                <NavLink to="/home">Home</NavLink>
-                <NavLink to="/events">Events</NavLink>
-            </ul>
-
-            <div className="content">
-                <TransitionGroup>
-                    <CSSTransition
-                        key={location.key}
-                        classNames="fade"
-                        timeout={300}
-                    >
-                        <Switch location={location}>
-                            <Route path="/home" children={<Home/>}/>
-                            <Route path="/events" children={<Events/>}/>
-                        </Switch>
-                    </CSSTransition>
-                </TransitionGroup>
-            </div>
-        </div>
-    )
-}
-
-function NavLink(props) {
-    return (
-        <li className="navItem">
-            <Link {...props} style={{color: "inherit"}}/>
-        </li>
-    );
-}
+  <Provider store={store}>
+    <AuthContext.Provider  value={true}>
+      <Router>
+        <ul className="nav">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/events">Events</NavLink>
+        </ul>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login}/>
+          <Route path="/signup" component={Signup}/>
+          <PrivateRoute path="/events" component={Events} />
+          <Route component={PageNotFound}/>
+        </Switch>
+      </Router>
+    </AuthContext.Provider>
+  </Provider>,
+  document.getElementById("container")
+);
 
 serviceWorker();

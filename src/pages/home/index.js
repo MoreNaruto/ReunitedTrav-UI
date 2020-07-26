@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import CarouselSection from "./CarouselSection";
-import CardSection from "./CardSection";
-import PurposeSection from "./PurposeSection";
+import CarouselSection from "../../components/CarouselSection";
+import CardSection from "../../components/CardSection";
+import PurposeSection from "../../components/PurposeSection";
 
 class Home extends Component {
     render() {

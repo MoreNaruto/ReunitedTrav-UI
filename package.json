@@ -16,6 +16,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
+    "react-router-auth": "^1.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",
@@ -25,7 +26,6 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "test": "react-scripts test",
-    "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production --display-error-details",
     "watch": "webpack --watch"
   },
@@ -57,10 +57,15 @@
     "directory-named-webpack-plugin": "^4.0.1",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^2.0.0",
+    "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react-hot-loader": "^4.12.21",
     "style-loader": "^1.2.1",
+    "styled-components": "^5.1.1",
+    "terser-webpack-plugin": "^3.0.7",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   }
