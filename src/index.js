@@ -14,15 +14,18 @@ import NavLink from "./components/NavLink";
 import { Provider } from "react-redux";
 import Login from "./pages/login";
 import Signup from "./pages/sign-up";
+import { Nav } from "react-bootstrap";
 
 ReactDOM.render(
   <Provider store={store}>
     <AuthContext.Provider  value={true}>
       <Router>
-        <ul className="nav">
-          <NavLink to="/">Home</NavLink>
+        <Nav variant="pills" className="justify-content-start" defaultActiveKey="/home">
+          <NavLink to="/" href="/home">Home</NavLink>
           <NavLink to="/events">Events</NavLink>
-        </ul>
+          <NavLink to="/signup" className="navbar-right">Sign up</NavLink>
+          <NavLink to="/login" className="navbar-right">Login</NavLink>
+        </Nav>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login}/>

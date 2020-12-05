@@ -73,5 +73,6 @@ module.exports = {
     hot: true,
     publicPath: "/",
     historyApiFallback: true,
+    port: 8081
   },
 };
