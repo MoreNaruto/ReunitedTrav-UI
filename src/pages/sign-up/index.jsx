@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import logoImg from "../../../public/fake_image.jpeg";
-import { Card, Logo, Form, Input, Button } from "../../components/AuthForms";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import logoImg from '../../../public/fake_image.jpeg';
+import {
+  Card, Logo, Form, Input, Button,
+} from '../../components/AuthForms';
 
 class Signup extends Component {
   render() {

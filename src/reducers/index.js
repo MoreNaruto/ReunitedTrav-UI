@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import eventsData from "./events/data";
+import eventsData from './events/data';
 
 export default combineReducers({
-    eventsData
+  eventsData,
 });

@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import logoImg from "../../../public/fake_image.jpeg";
-import { Card, Logo } from "../../components/AuthForms";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import { Card, Logo } from '../../components/AuthForms';
+import logoImg from '../../../public/fake_image.jpeg';
 
-import AuthService from "../../services/auth.service";
+import AuthService from '../../services/auth.service';
 
-const required = value => {
+const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -26,10 +26,10 @@ export default class Login extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       loading: false,
-      message: "",
+      message: '',
     };
   }
 
@@ -49,7 +49,7 @@ export default class Login extends Component {
     e.preventDefault();
 
     this.setState({
-      message: "",
+      message: '',
       loading: true,
     });
 
@@ -58,22 +58,21 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.loginUser(this.state.username, this.state.password).then(
         () => {
-          this.props.history.push("/events");
+          this.props.history.push('/events');
           window.location.reload();
         },
         (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+          const resMessage = (error.response
+              && error.response.data
+              && error.response.data.message)
+            || error.message
+            || error.toString();
 
           this.setState({
             loading: false,
             message: resMessage,
           });
-        }
+        },
       );
     } else {
       this.setState({
@@ -122,7 +121,7 @@ export default class Login extends Component {
               disabled={this.state.loading}
             >
               {this.state.loading && (
-                <span className="spinner-border spinner-border-sm"></span>
+                <span className="spinner-border spinner-border-sm" />
               )}
               <span>Login</span>
             </button>
@@ -136,7 +135,7 @@ export default class Login extends Component {
             </div>
           )}
           <CheckButton
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             ref={(c) => {
               this.checkBtn = c;
             }}

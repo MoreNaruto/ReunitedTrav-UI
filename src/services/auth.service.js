@@ -1,10 +1,10 @@
-import { login, register } from "../api/authentication";
+import { login, register } from '../api/authentication';
 
 class AuthService {
   loginUser(username, password) {
     return login(username, password).then((response) => {
       if (response.data.jwt) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem('user', JSON.stringify(response.data));
       }
 
       return response.data;
@@ -12,7 +12,7 @@ class AuthService {
   }
 
   logoutUser() {
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
   }
 
   registerUser(data) {
@@ -20,7 +20,7 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem("user"));
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
 

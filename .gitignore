@@ -25,3 +25,9 @@ yarn-error.log*
 .env
 .history/
 .vscode/
+
+ui/styles/*.css
+dist
+*.pid
+*.sublime-project
+*.sublime-workspace
