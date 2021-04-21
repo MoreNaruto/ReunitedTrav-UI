@@ -33,18 +33,6 @@ export default class Login extends Component {
     };
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
-
   handleLogin(e) {
     e.preventDefault();
 
@@ -79,6 +67,18 @@ export default class Login extends Component {
         loading: false,
       });
     }
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    });
   }
 
   render() {
