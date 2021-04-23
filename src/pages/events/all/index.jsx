@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Events.propTypes = {
   loading: PropTypes.bool.isRequired,
-  events: PropTypes.arrayOf(React.propTypes.string).isRequired,
+  events: PropTypes.arrayOf(React.propTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Events);
